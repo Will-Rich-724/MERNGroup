@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Router, Link, navigate } from '@reach/router';
 import axios from 'axios';
 import LogReg from './Views/LogReg';
-import Locate from './Views/Locate;'
+import Locate from './Views/Locate'
 
 function App() {
   return (
