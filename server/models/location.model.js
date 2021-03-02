@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const EventSchema = new mongoose.Schema(
+const LocationSchema = new mongoose.Schema(
     {
         eventName: {
             type: String,
@@ -24,17 +24,24 @@ const EventSchema = new mongoose.Schema(
             type: String,
             require: [true, "An event requires a state"],
         },
+        phoneNumber: {
+            type: Number,
+            require: [true]
+        },
         date: {
-            type: Date,
+            type: String,
             require: [true, "An event requires a date"],
         },
-        
+        time: {
+            type: String,
+            require: [true]
+        }
     },
     { timestamp: true}
 );
 
 
 
-const Event = mongoose.model("Event", EventSchema);
+const Location = mongoose.model("Location", LocationSchema);
 
-module.exports = Event
+module.exports = Location

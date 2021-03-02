@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Router, Link, navigate } from '@reach/router';
 import axios from 'axios';
-import LocateMap from '../Components/LocateMap';
 
-const Locate = (props) => {
+const Appointments = (props) => {
     return (
         <div>
-            <h1>Where Map will be called</h1>
-            <LocateMap />
+            <h1>Upcoming Appointments</h1>
+            <h1>Past Appointments</h1>
         </div>
     )
 }
 
-export default Locate;
+export default Appointments;
