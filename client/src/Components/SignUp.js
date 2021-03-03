@@ -23,13 +23,13 @@ const SignUp = (props) => {
             },
                 { withCredentials: true })
             .then(res => {
-                console.log(res);
-                
+                console.log(res);                
                 setFirstName("");
                 setLastName("");
                 setEmail("");
                 setPassword("");
                 setConfirmPassword("");
+                navigate("/appointments")
             })
             .catch(err => {
                 console.log(err);

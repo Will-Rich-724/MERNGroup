@@ -16,7 +16,8 @@ const SignIn = (props) => {
             )
             .then(res => {
                 console.log(res);
-                navigate(`/locate`);
+                window.open("https://www.google.com/search?q=blood+donation+near+me", "_blank");
+                navigate("/schedule");
             })
             .catch(err => {
                 console.log(err);
