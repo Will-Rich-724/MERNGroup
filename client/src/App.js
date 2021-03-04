@@ -6,6 +6,8 @@ import LogOutButton from './Components/LogOutButton';
 import LogReg from './Views/LogReg';
 import Schedule from './Views/Schedule';
 import Appointments from './Views/Appointments';
+import Header from "./Components/Header";
+import NavBar from "./Components/NavBar";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,7 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <LogOutButton />
+      <div className="header">
+        <Header />
+        <NavBar />
+      </div>
       <Router>
         <LogReg path='/' />
         <Schedule path='/schedule' location = {location} setLocation = {setLocation} />

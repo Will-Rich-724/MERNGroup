@@ -2,6 +2,61 @@
   text-align: center;
 }
 
+.header {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 940px;
+}
+
+.headerTitle {
+  display: inline-block;
+  font-size: 40px;
+  width: 300px;
+}
+
+.navBar {
+  display: inline-flex;
+  justify-content: space-evenly;
+  width: 600px;
+  text-decoration: none;
+  border: 1px solid black;
+  height: 55px;
+  vertical-align: middle;
+  margin-top: 20px;
+}
+
+.navBar a {
+  text-decoration: none;
+  font: Black;
+}
+
+.logReg {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 800px;
+  align-items: flex-start;
+}
+
+.signIn {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+  vertical-align: top;
+  
+}
+
+.signUp {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+
+
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
