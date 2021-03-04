@@ -15,7 +15,7 @@ const LogOutButton = (props) => {
     }
 
     return(
-        <Button onClick={logout}>Logout</Button>
+        <button style={{padding: "10px"}} onClick={logout}>LOGOUT</button>
     )
 };
 

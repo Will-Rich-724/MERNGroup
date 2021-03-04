@@ -1,39 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
-import axios from "axios";
+
+import React, { useState, useEffect } from 'react';
+import { Router, Link, navigate } from '@reach/router';
+import axios from 'axios';
+import LogOutButton from '../Components/LogOutButton';
 
 const Schedule = (props) => {
-  return (
-    <div>
-      <h1>Where Map will be called</h1>
-      {/* <LocateMap /> */}
-      <label for="start">Choose a date:</label>
+    const { location, setLocation } = props;
 
-      <input
-        type="date"
-        id="dateSelect"
-        name="appointment"
-        value="2018-07-22"
-        min="2018-01-01"
-        max="2018-12-31"
-      ></input>
-      <label for="appt">Choose a time for your meeting:</label>
+    // useEffect (() => {
+    //     const site = $( "#location option:selected" ).text();
+    //     return site;
+    // }, [setLocation]);
 
-      <input
-        type="time"
-        id="appt"
-        name="appt"
-        min="09:00"
-        max="18:00"
-        required
-      ></input>
-
-      <small>Appointment times range from 9am to 5pm</small>
-      <p>Please shcedule your appointment using a time and that works for you</p>
-      <p>The Red Cross says you must wait 8 weeks between donations, so you may be turned away if within that time frame.</p>
-      <p>Most donation loactions will take your blood pressure when you arrive and turn you away if your blood pressure is over 140/100</p>
-    </div>
-  );
-};
+    return (
+        <div className='container' style={{padding: "20px"}}>
+            <div className='row'>
+                <h1 className='col-6'>Blood Donor Pro</h1>
+                <button className='col-2' style={{background: "CornflowerBlue", padding: "10px"}}>SCHEDULE</button>
+                <button className='col-2' style={{padding: "10px", width: "auto"}} onClick={(e) => navigate("/appointments")}>APPOINTMENTS</button>
+                <LogOutButton className='col-1' />
+            </div>
+            <h5 style={{marginTop: "20px"}}>Please pick the donation site from the pulldown menu</h5>
+            <label>
+                <select id="location" name="location" input type="text" onChange={(e) => setLocation(e.target.value)}>
+                    <option value="DearbornARCBDC">American Red Cross Blood Donation Center - Dearborn</option>
+                    <option value="Bonfils">Bonfils Blood Center - Littleton</option>
+                    <option value="ChildrensHospital">Children's Hospital Colorado Blood Donor Center - Aurora</option>
+                    <option value="RiverviewRCBDC">Riverview Red Cross Blood, Platelet and Plasma Donation Center - Riverview</option>
+                </select>
+            </label>
+            <h5 style={{marginTop: "20px"}}>Please view all appointments for $(location.name) below</h5>
+            {
+                console.log(location)
+            }
+        </div>
+    )
+}
 
 export default Schedule;
