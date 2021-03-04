@@ -6,7 +6,7 @@ import SignUp from '../Components/SignUp';
 
 const LogReg = (props) => {
     return(
-        <div>
+        <div className="logReg">
             <SignIn />
             <SignUp />
         </div>
