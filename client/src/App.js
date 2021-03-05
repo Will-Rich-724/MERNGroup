@@ -24,6 +24,7 @@ function App() {
         <LogReg path='/' />
         <Schedule path='/schedule' location = {location} setLocation = {setLocation} />
         <Appointments path='/appointments' />
+        {/* <CreateAppointment path ='/admin' /> */}
       </Router>
     </div>
   );

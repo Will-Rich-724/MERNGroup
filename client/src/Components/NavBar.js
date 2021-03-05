@@ -7,9 +7,11 @@ const NavBar = (props) => {
       <div className="headerTitle">
       </div>
       <div className="navBar">
-        <Link to={"/locate"}>
+
+        
+        <a href="https://www.google.com/search?q=blood+donation+near+me" target="_blank">
           <p>Locate a Blood Drive</p>
-        </Link>
+        </a>
         <p>|</p>
         <Link to={"/schedule"}>
           <p>Schedule an Appointment</p>
