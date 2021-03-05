@@ -1,16 +1,19 @@
-import logo from "./logo.svg";
-import "./App.css";
-import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
-import axios from "axios";
-import LogReg from "./Views/LogReg";
-import Schedule from "./Views/Schedule";
-import Appointments from "./Views/Appointments";
+import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Router, Link, navigate } from '@reach/router';
+import axios from 'axios';
+import LogOutButton from './Components/LogOutButton';
+import LogReg from './Views/LogReg';
+import Schedule from './Views/Schedule';
+import Appointments from './Views/Appointments';
 import Header from "./Components/Header";
 import NavBar from "./Components/NavBar";
-import Locate from "./Views/Locate"
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [ location, setLocation ] = useState("DearbornARCBDC");
+
   return (
     <div className="App">
       <div className="header">
@@ -18,10 +21,9 @@ function App() {
         <NavBar />
       </div>
       <Router>
-        <LogReg path="/" />
-        <Locate path="/locate" />
-        <Schedule path="/schedule" />
-        <Appointments path="/appointments" />
+        <LogReg path='/' />
+        <Schedule path='/schedule' location = {location} setLocation = {setLocation} />
+        <Appointments path='/appointments' />
       </Router>
     </div>
   );

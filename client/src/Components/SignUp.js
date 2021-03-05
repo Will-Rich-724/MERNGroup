@@ -28,7 +28,6 @@ const SignUp = (props) => {
       )
       .then((res) => {
         console.log(res);
-
         setFirstName("");
         setLastName("");
         setEmail("");
