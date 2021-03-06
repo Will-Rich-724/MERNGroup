@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema(
         email: {
             type: String,
             require: [true, "An email is required"],
-            minlength: [2, "email must have at least two letters"]
+            minlength: [2, "email must have at least two letters"],
+            unique: true,
         },
         password: {
             type: String,
@@ -24,7 +25,7 @@ const UserSchema = new mongoose.Schema(
             minlength: [2, "password must have at least two characters"]
         },
     },
-    { timestamp: true}
+    { timestamps: true}
 );
 
 UserSchema.virtual("confirmPassword")

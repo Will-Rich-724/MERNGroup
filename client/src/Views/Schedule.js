@@ -30,13 +30,17 @@ const Schedule = (props) => {
         .then(res => setUserId(res.data._id))
     },[])
 
-    const takeAppointment = (e) => {
+    const takeAppointment = (e, apt) => {
         e.preventDefault();
-        axios.put(`http://localhost:8000/api/appointment/${claimedAppointment}`,{
-            eventName,
-            date,
-            time,
-            userId
+        setClaimedAppointment(apt._id)
+        setEventName(apt.eventName) 
+        setDate(apt.date)
+        setTime(apt.time)
+        axios.put(`http://localhost:8000/api/appointment/${apt._id}`,{
+            eventname: apt.eventName,
+            date: apt.date,
+            time: apt.time,
+            userId,
         })
         .then((res) =>{
             if(res.data.errors) {
@@ -65,7 +69,7 @@ const Schedule = (props) => {
                 console.log(location)
             }
             
-            {appointments.map((appointment, index) => {if (appointment.eventName === location && appointment.userId === null) {
+            {appointments.map((appointment) => {if (appointment.eventName === location && appointment.userId === null) {
                 return (
                 <tr key={appointment._id}>
                     <td>
@@ -75,7 +79,7 @@ const Schedule = (props) => {
                         {appointment.time}
                     </td>
                     <td>
-                        <button onClick={(e) => {setClaimedAppointment(appointment._id) ; setEventName(appointment.eventName) ; setDate(appointment.date) ; setTime(appointment.time) ; takeAppointment(e)}}>Select Appointment</button>
+                        <button onClick={(e) => takeAppointment(e, appointment)}>Select Appointment</button>
                     </td>
                 </tr>
             )}})}
