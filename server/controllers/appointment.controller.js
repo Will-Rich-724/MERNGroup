@@ -28,5 +28,18 @@ module.exports = {
         Appointment.deleteOne({ _id: req.params.id})
             .then(deletedAppointments => res.json(deletedAppointments))
             .catch(err => res.json(err))
-    }
+    },
+    getUsersAppointments: (req, res) => {
+        const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
+
+        Appointment.find({userId: new mongoose.Types.ObjectId(decodedJWT.payload._id)})
+            .then((userAppoitnments) => {
+                console.log(userAppoitnments);
+                res.json(userAppoinments)
+            })
+            .catch((err) => {
+                console.log(`Error finding all appointments for logged in user: ${ err }`);
+                res.json(err)
+            });
+    },
 }
