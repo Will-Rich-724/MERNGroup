@@ -1,7 +1,7 @@
 const Appointment = require("../models/appointment.model");
 
 module.exports = {
-    getAllAppointment(req, res) {
+    getAllAppointments(req, res) {
         Appointment.find()
             .then(allAppointments => res.json(allAppointments))
             .catch(err => res.json(err))
