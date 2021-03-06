@@ -4,16 +4,43 @@ import axios from 'axios';
 import LogOutButton from '../Components/LogOutButton';
 
 const Appointments = (props) => {
+    const [ userAccount, setUserAccount ] = useState("");
+    const [ firstName, setFirstName ] = useState("");
+    const [ lastName, setLastName ] = useState("");
+    const [ allAppointments, setAllAppointments ] = useState([]);
+
     // var today = new.date(today)
+    //axios get logged in user
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/users/user/loggedin", {
+            withCredentials: true
+        })
+        .then(res => setUserAccount(res.data._id))
+    },[]);
+
+    //axios get logged in users info
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/user/${userAccount}`, {
+            withCredentials: true
+        })
+        .then(res => {
+            setFirstName(res.data.firstName);
+            setLastName(res.data.lastName)
+        })
+        .catch(err => console.log(err))
+    }, [])
+
+    useEffect(() => {
+        axios.get("http:localhost:8000/api/appoinment/usersappointments", {
+            withCredentials: true
+        })
+        .then(res => setAllAppointments(res.data))
+        .catch(err => console.log(err))
+    }, [])
 
     return (
         <div className='container' style={{padding: "20px"}}>
-            {/* <div className='row'>
-                <h1 className='col-6'>Blood Donor Pro</h1>
-                <button className='col-2' style={{padding: "10px"}} onClick={(e) => navigate("/schedule")}>SCHEDULE</button>
-                <button className='col-2' style={{background: "CornflowerBlue", padding: "10px"}}>APPOINTMENTS</button>
-                <LogOutButton className='col-1' />
-            </div> */}
+            <h3> Hi {firstName} here is a list of your appointments:</h3>
             <h1>Upcoming Appointments</h1>
             {/* Nested in an if (if < var today)
             Map  */}

@@ -6,11 +6,13 @@ const Admin = (props) => {
     const [eventName, setEventName] = useState("American Red Cross Blood Donation Center - Dearborn")
     const [date, setDate] = useState("2021-03-14");
     const [time, setTime] = useState("10:00 AM");
+    const [userId, setUserId] = useState(null);
 
     //axios create appointment
     const addAppointment = (e) => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/appointments', {
+            userId,
             eventName,
             date,
             time
