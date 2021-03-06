@@ -33,21 +33,21 @@ const SignIn = (props) => {
         <form onSubmit={login}>
           <InputGroup
             label="Email:"
-            value={email.value}
+            value={email}
             type="text"
             handleChange={(e) => setEmail(e.target.value)}
             name="email"
           />
           <InputGroup
             label="Password:"
-            value={password.value}
+            value={password}
             type="password"
             handleChange={(e) => setPassword(e.target.value)}
             name="password"
           />
 
           <Button type="submit">
-            <i className="fas fa-edit"></i>Login
+            Login
           </Button>
           <p>{errorMessage ? errorMessage : ""}</p>
         </form>

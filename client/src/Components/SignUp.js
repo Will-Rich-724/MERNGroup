@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Router, Link, navigate } from "@reach/router";
 import axios from "axios";
-import { InputGroup, Button } from "../Utils/Utils"
+import { InputGroup, Button } from "../Utils/Utils";
 
 const SignUp = (props) => {
     const [firstName, setFirstName] = useState("");
@@ -42,63 +42,70 @@ const SignUp = (props) => {
 
     return (
         <div className="signUp">
-
             <fieldset>
                 <legend>Register</legend>
                 <form onSubmit={register}>
                     <InputGroup
                         label="First Name"
-                        value={firstName.value}
+                        value={firstName}
                         type="text"
-                        handleChange={e => setFirstName(e.target.value)}
+                        handleChange={(e) => setFirstName(e.target.value)}
                         name="firstName"
                     />
                     {errors.firstName ? (
-                        <span style={{ color: "red" }}>{errors.firstName.message}</span>
+                        <span style={{ color: "red" }}>
+                            {errors.firstName.message}
+                        </span>
                     ) : null}
                     <InputGroup
                         label="Last Name"
-                        value={lastName.value}
+                        value={lastName}
                         type="text"
                         handleChange={(e) => setLastName(e.target.value)}
                         name="lastName"
                     />
                     {errors.lastName ? (
-                        <span style={{ color: "red" }}>{errors.lastName.message}</span>
+                        <span style={{ color: "red" }}>
+                            {errors.lastName.message}
+                        </span>
                     ) : null}
                     <InputGroup
                         label="Email"
-                        value={email.value}
+                        value={email}
                         type="text"
                         handleChange={(e) => setEmail(e.target.value)}
                         name="email"
                     />
                     {errors.email ? (
-                        <span style={{ color: "red" }}>{errors.email.message}</span>
+                        <span style={{ color: "red" }}>
+                            {errors.email.message}
+                        </span>
                     ) : null}
                     <InputGroup
                         label="Password"
-                        value={password.value}
+                        value={password}
                         type="password"
                         handleChange={(e) => setPassword(e.target.value)}
                         name="password"
                     />
                     {errors.password ? (
-                        <span style={{ color: "red" }}>{errors.password.message}</span>
+                        <span style={{ color: "red" }}>
+                            {errors.password.message}
+                        </span>
                     ) : null}
                     <InputGroup
                         label="Confirm Password"
-                        value={confirmPassword.value}
+                        value={confirmPassword}
                         type="password"
                         handleChange={(e) => setConfirmPassword(e.target.value)}
                         name="confirmPassword"
                     />
                     {errors.confirmPassword ? (
-                        <span style={{ color: "red" }}>{errors.confirmPassword.message}</span>
+                        <span style={{ color: "red" }}>
+                            {errors.confirmPassword.message}
+                        </span>
                     ) : null}
-                    <Button type="submit">
-                        Register
-        </Button>
+                    <Button type="submit">Register</Button>
                 </form>
             </fieldset>
         </div>
