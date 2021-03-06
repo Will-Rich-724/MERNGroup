@@ -6,17 +6,17 @@ import LogOutButton from '../Components/LogOutButton';
 
 const Schedule = (props) => {
     const [ location, setLocation ] = useState("American Red Cross Blood Donation Center - Dearborn");
+    const [ appointments, setAppointments] = useState([])
 
-    //Axios get 
+    //Axios get all appointments
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/appointments')
+        .then(res => setAppointments(res.data))
+        .catch(err => console.log(err))
+    }, [])
 
     return (
         <div className='container' style={{padding: "20px"}}>
-            {/* <div className='row'>
-                <h1 className='col-6'>Blood Donor Pro</h1>
-                <button className='col-2' style={{background: "CornflowerBlue", padding: "10px"}}>SCHEDULE</button>
-                <button className='col-2' style={{padding: "10px", width: "auto"}} onClick={(e) => navigate("/appointments")}>APPOINTMENTS</button>
-                <LogOutButton className='col-1' />
-            </div> */}
             <h5 style={{marginTop: "20px"}}>Please pick the donation site from the pulldown menu</h5>
             <form>
                 <select id="location" name="location" input type="text" onChange={(e) => setLocation(e.target.value)}>
@@ -30,8 +30,26 @@ const Schedule = (props) => {
             {
                 console.log(location)
             }
-
-            {/* Map of location's apppointments */}
+            <h3>Available Appointments</h3>
+            
+            {appointments.map((appointment, index) => {if (appointment.eventName === location) {
+                return (
+                <tr key={appointment._id}>
+                    <td>
+                        {appointment.eventName}
+                    </td>
+                    <td>
+                        {appointment.date}
+                    </td>
+                    <td>
+                        {appointment.time}
+                    </td>
+                    <td>
+                        <button>Select Appointment</button>
+                    </td>
+                </tr>
+            )}})}
+            
         </div>
     )
 }

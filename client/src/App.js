@@ -8,6 +8,7 @@ import Schedule from './Views/Schedule';
 import Appointments from './Views/Appointments';
 import Header from "./Components/Header";
 import NavBar from "./Components/NavBar";
+import Admin from "./Views/Admin";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,7 +25,7 @@ function App() {
         <LogReg path='/' />
         <Schedule path='/schedule' location = {location} setLocation = {setLocation} />
         <Appointments path='/appointments' />
-        {/* <CreateAppointment path ='/admin' /> */}
+        <Admin path ='/admin' />
       </Router>
     </div>
   );
