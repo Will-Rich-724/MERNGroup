@@ -15,6 +15,9 @@ const AppointmentSchema = new mongoose.Schema(
         time: {
             type: String,
             require: [true]
+        },
+        userId: {
+            type: mongoose.Types.ObjectId
         }
     },
     { timestamp: true}

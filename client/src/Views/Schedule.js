@@ -6,7 +6,14 @@ import LogOutButton from '../Components/LogOutButton';
 
 const Schedule = (props) => {
     const [ location, setLocation ] = useState("American Red Cross Blood Donation Center - Dearborn");
-    const [ appointments, setAppointments] = useState([])
+    const [ appointments, setAppointments] = useState([]);
+    const [ userId, setUserId] = useState("");
+    const [ claimedAppointment, setClaimedAppointment] = useState("");
+    const [ date, setDate] = useState("");
+    const [ time, setTime] = useState("");
+    const [ eventName, setEventName] = useState("")
+    const [ errors, setErrors] = useState({})
+
 
     //Axios get all appointments
     useEffect(() => {
@@ -14,6 +21,33 @@ const Schedule = (props) => {
         .then(res => setAppointments(res.data))
         .catch(err => console.log(err))
     }, [])
+
+    //Axois get loggged in user
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/users/user/loggedin", {
+            withCredentials: true
+        })
+        .then(res => setUserId(res.data._id))
+    },[])
+
+    const takeAppointment = (e) => {
+        e.preventDefault();
+        axios.put(`http://localhost:8000/api/appointment/${claimedAppointment}`,{
+            eventName,
+            date,
+            time,
+            userId
+        })
+        .then((res) =>{
+            if(res.data.errors) {
+                setErrors(res.data.errors);
+            } else {
+                console.log("claimed")
+            }
+        })
+        .catch(err => console.log(err));
+
+    }
 
     return (
         <div className='container' style={{padding: "20px"}}>
@@ -30,14 +64,10 @@ const Schedule = (props) => {
             {
                 console.log(location)
             }
-            <h3>Available Appointments</h3>
             
-            {appointments.map((appointment, index) => {if (appointment.eventName === location) {
+            {appointments.map((appointment, index) => {if (appointment.eventName === location && appointment.userId === null) {
                 return (
                 <tr key={appointment._id}>
-                    <td>
-                        {appointment.eventName}
-                    </td>
                     <td>
                         {appointment.date}
                     </td>
@@ -45,7 +75,7 @@ const Schedule = (props) => {
                         {appointment.time}
                     </td>
                     <td>
-                        <button>Select Appointment</button>
+                        <button onClick={(e) => {setClaimedAppointment(appointment._id) ; setEventName(appointment.eventName) ; setDate(appointment.date) ; setTime(appointment.time) ; takeAppointment(e)}}>Select Appointment</button>
                     </td>
                 </tr>
             )}})}
