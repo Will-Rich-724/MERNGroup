@@ -16,6 +16,7 @@ app.use(express.json());
 //routes
 require("./routes/users.routes")(app)
 require("./routes/locations.routes")(app)
+require("./routes/appointments.routes")(app)
 
 app.listen(process.env.DB_PORT, () =>
     console.log(`Listening on port ${process.env.DB_PORT}`)
