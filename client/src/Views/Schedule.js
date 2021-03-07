@@ -65,23 +65,26 @@ const Schedule = (props) => {
                 </select>
             </form>
             <h5 style={{marginTop: "20px"}}>Please view all appointments for {location} below</h5>
-            {
-                console.log(location)
-            }
             
-            {appointments.map((appointment) => {if (appointment.eventName === location && appointment.userId === null) {
+            {appointments.map((appointment, index) => {if (appointment.eventName === location && appointment.userId === null) {
                 return (
-                <tr key={appointment._id}>
-                    <td>
-                        {appointment.date}
-                    </td>
-                    <td>
-                        {appointment.time}
-                    </td>
-                    <td>
-                        <button onClick={(e) => takeAppointment(e, appointment)}>Select Appointment</button>
-                    </td>
-                </tr>
+
+                    <p key={index} style={{width: "750px", marginTop: "20px", marginLeft: "150px", borderBottom: "1px solid black", paddingBottom: "20px"}}>
+                        <span style={{fontWeight: "bold", color: "Cornflowerblue"}}>Date of Appointment:</span> {appointment.date}   |
+                        <span style={{fontWeight: "bold", color: "Cornflowerblue"}}>   Time of Appointment:</span> {appointment.time}   |
+                        <span>   <button onClick={(e) => takeAppointment(e, appointment)}>Select Appointment</button></span>
+                    </p>
+                // <tr key={appointment._id}>
+                //     <td>
+                //         {appointment.date}
+                //     </td>
+                //     <td>
+                //         {appointment.time}
+                //     </td>
+                //     <td>
+                //         <button onClick={(e) => takeAppointment(e, appointment)}>Select Appointment</button>
+                //     </td>
+                // </tr>
             )}})}
             
         </div>
