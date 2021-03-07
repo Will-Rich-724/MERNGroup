@@ -9,6 +9,7 @@ const Admin = (props) => {
     const [date, setDate] = useState("2021-02-14");
     const [time, setTime] = useState("10:00 AM");
     const [userId, setUserId] = useState(null);
+    const { socket } = props;
 
     //axios create appointment
     const addAppointment = (e) => {
@@ -20,7 +21,10 @@ const Admin = (props) => {
                 date,
                 time,
             })
-            .then((res) => console.log(res))
+            .then((res) => { 
+                console.log(res)
+                socket.emit("added_appointment", res.data);
+            })
             .catch((err) => console.log(err));
     };
 
