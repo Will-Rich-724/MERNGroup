@@ -2,28 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Router, Link, navigate } from "@reach/router";
 import axios from "axios";
 import LogOutButton from "../Components/LogOutButton";
+import { Button } from "../Utils/Utils";
 
 const Appointments = (props) => {
     const [userAccount, setUserAccount] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [allAppointments, setAllAppointments] = useState([]);
+    const [refresh, setRefresh] = useState(0);
     const { socket } = props;
 
-    useEffect(() => { 
-        socket.on("removed_appointment_emitted", (data) => { 
-    
-            setAllAppointments(allAppointments.filter((appointment) => { 
-                return appointment._id !== data.claimedAppointment._id;
-            })
-        )});
-    
-        socket.on("added_appointment_emitted", (data) => { 
-    
-            setAllAppointments([data.addAppointment, ...allAppointments]);           
+    useEffect(() => {
+        socket.on("claimed_appointment_omitted", (data) => {
+            setAllAppointments(
+                allAppointments.filter((appointment) => {
+                    return appointment._id !== data.claimedAppointment._id;
+                })
+            );
+        });
+
+        socket.on("added_appointment_emitted", (data) => {
+            setAllAppointments([data.addAppointment, ...allAppointments]);
         });
     }, [allAppointments, socket]);
-    
+
     // var today = new.date(today)
     //axios get logged in user
     useEffect(() => {
@@ -55,7 +57,17 @@ const Appointments = (props) => {
                     })
                     .catch((err) => console.log(err));
             });
-    }, []);
+    }, [refresh]);
+
+    const deleteApt = (id) => {
+        axios
+            .delete(`http://localhost:8000/api/appointment/${id}`)
+            .then((res) => {
+                setRefresh(refresh + 1);
+                console.log("Response: ", res);
+            })
+            .catch((err) => console.log("Error: ", err));
+    };
 
     const formatDate = (date, time) => {
         let [hourMin, amOrPm] = time.split(" ");
@@ -87,29 +99,38 @@ const Appointments = (props) => {
             <h3> Hi {firstName} here is a list of your appointments:</h3>
             <h1>Upcoming Appointments</h1>
             {upcomingApt.map((appointment, idx) => {
-                const {eventName, date, time} = appointment
+                const { eventName, date, time} = appointment;
 
-                return(
+                return (
                     <div key={idx}>
                         <h2>{eventName}</h2>
-                        <p>{date} {time}</p>
+                        <p>
+                            {date} {time}
+                        </p>
+                        <Button className="deleteApt" onClick={(e) => deleteApt(appointment._id) }>
+                            Remove Apt
+                        </Button>
                     </div>
-                )
+                );
             })}
 
             <h1>Past Appointments</h1>
 
             {prevApt.map((appointment, idx) => {
-                const {eventName, date, time} = appointment
+                const { eventName, date, time } = appointment;
 
-                return(
+                return (
                     <div key={idx}>
                         <h2>{eventName}</h2>
-                        <p>{date} {time}</p>
+                        <p>
+                            {date} {time}
+                        </p>
+                        <Button className="deleteApt" onClick={(e) => deleteApt(appointment._id) }>
+                            Remove Apt
+                        </Button>
                     </div>
-                )
+                );
             })}
-
         </div>
     );
 };

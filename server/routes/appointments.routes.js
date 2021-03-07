@@ -8,5 +8,5 @@ module.exports = app => {
     app.put("/api/appointment/:id", appointmentController.updateAppointment);
     app.delete("/api/appointment/:id", appointmentController.deleteAppointment);
 
-    app.get('/api/appoinment/usersappointments', authenticate, appointmentController.getUsersAppointments);
+    app.get('/api/appointment/usersappointments', authenticate, appointmentController.getUsersAppointments);
 }

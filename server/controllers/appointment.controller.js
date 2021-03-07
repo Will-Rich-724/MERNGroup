@@ -1,4 +1,6 @@
 const Appointment = require("../models/appointment.model");
+const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 module.exports = {
     getAllAppointments(req, res) {
@@ -33,9 +35,9 @@ module.exports = {
         const decodedJWT = jwt.decode(req.cookies.usertoken, { complete: true });
 
         Appointment.find({userId: new mongoose.Types.ObjectId(decodedJWT.payload._id)})
-            .then((userAppoitnments) => {
-                console.log(userAppoitnments);
-                res.json(userAppoinments)
+            .then((userAppointments) => {
+                console.log(userAppointments);
+                res.json(userAppointments)
             })
             .catch((err) => {
                 console.log(`Error finding all appointments for logged in user: ${ err }`);
