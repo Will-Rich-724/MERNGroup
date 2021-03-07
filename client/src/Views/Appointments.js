@@ -8,7 +8,22 @@ const Appointments = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [allAppointments, setAllAppointments] = useState([]);
+    const { socket } = props;
 
+    useEffect(() => { 
+        socket.on("removed_appointment_emitted", (data) => { 
+    
+            setAllAppointments(allAppointments.filter((appointment) => { 
+                return appointment._id !== data.claimedAppointment._id;
+            })
+        )});
+    
+        socket.on("added_appointment_emitted", (data) => { 
+    
+            setAllAppointments([data.addAppointment, ...allAppointments]);           
+        });
+    }, [allAppointments, socket]);
+    
     // var today = new.date(today)
     //axios get logged in user
     useEffect(() => {

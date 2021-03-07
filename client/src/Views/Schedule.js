@@ -11,8 +11,9 @@ const Schedule = (props) => {
     const [ claimedAppointment, setClaimedAppointment] = useState("");
     const [ date, setDate] = useState("");
     const [ time, setTime] = useState("");
-    const [ eventName, setEventName] = useState("")
-    const [ errors, setErrors] = useState({})
+    const [ eventName, setEventName] = useState("");
+    const [ errors, setErrors] = useState({});
+    const { socket } = props;
 
 
     //Axios get all appointments
@@ -46,7 +47,8 @@ const Schedule = (props) => {
             if(res.data.errors) {
                 setErrors(res.data.errors);
             } else {
-                console.log("claimed")
+                console.log("claimed");
+                socket.emit("claim_appointment", res.data);
             }
         })
         .catch(err => console.log(err));
