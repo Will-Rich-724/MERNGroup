@@ -22,7 +22,7 @@ const Admin = (props) => {
             })
             .then((res) => { 
                 console.log(res)
-                socket.emit("added_appointment_emitted", res.data);
+                socket.emit("added_appointment", res.data);
             })
             .catch((err) => console.log(err));
     };
