@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Router, Link, navigate } from '@reach/router';
-import axios from 'axios';
+import React from 'react';
 import SignIn from '../Components/SignIn';
 import SignUp from '../Components/SignUp';
 

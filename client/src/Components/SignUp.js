@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
+import React, { useState } from "react";
 import axios from "axios";
 import { InputGroup, Button } from "../Utils/Utils";
 

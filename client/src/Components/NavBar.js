@@ -9,7 +9,7 @@ const NavBar = (props) => {
       <div className="navBar">
 
         
-        <a href="https://www.google.com/search?q=blood+donation+near+me" target="_blank">
+        <a href="https://www.google.com/search?q=blood+donation+near+me" rel="noreferrer" target="_blank">
           <p>Locate a Blood Drive</p>
         </a>
         <p>|</p>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
 import axios from "axios";
-import LogOutButton from "../Components/LogOutButton";
 
 const Schedule = (props) => {
     const [location, setLocation] = useState(
@@ -36,10 +34,18 @@ const Schedule = (props) => {
 
     const takeAppointment = (e, apt) => {
         e.preventDefault();
+
         setClaimedAppointment(apt._id);
         setEventName(apt.eventName);
         setDate(apt.date);
         setTime(apt.time);
+
+        console.log(claimedAppointment);
+        console.log(eventName);
+        console.log(date);
+        console.log(time);
+        console.log(errors);
+
         axios
             .put(`http://localhost:8000/api/appointment/${apt._id}`, {
                 eventname: apt.eventName,
