@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
+import React, { useState } from "react";
 import axios from "axios";
 
 const Admin = (props) => {
@@ -8,7 +7,7 @@ const Admin = (props) => {
     );
     const [date, setDate] = useState("2021-02-14");
     const [time, setTime] = useState("10:00 AM");
-    const [userId, setUserId] = useState(null);
+    const [userId] = useState(null);
     const { socket } = props;
 
     //axios create appointment

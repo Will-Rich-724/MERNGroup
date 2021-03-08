@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
+import React, { useState } from "react";
+import { navigate } from "@reach/router";
 import axios from "axios";
 import { InputGroup, Button } from "../Utils/Utils";
 
@@ -17,7 +17,6 @@ const SignIn = (props) => {
             )
             .then(res => {
                 console.log(res);
-                // window.open("https://www.google.com/search?q=blood+donation+near+me", "_blank");
                 navigate("/schedule");
             })
             .catch(err => {
