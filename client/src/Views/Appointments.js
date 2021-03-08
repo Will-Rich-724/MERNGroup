@@ -96,7 +96,7 @@ const Appointments = (props) => {
         <div className="container" style={{ padding: "20px" }}>
             <h3> Hi {firstName} {lastName}, here is a list of your appointments:</h3>
             
-            <h1>Upcoming Appointments</h1>
+            <h1 style={{color: "#228B22"}}>Upcoming Appointments</h1>
             {upcomingApt.map((appointment, idx) => {
                 const { eventName, date, time} = appointment;
 
@@ -131,7 +131,7 @@ const Appointments = (props) => {
                         </span>{" "}{time} |
                         <span>
                             {" "}
-                            <button style={{borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
+                            <button style={{background: "#FF6347", color: "white", borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
                                 Remove Appointment
                             </button>
                         </span>
@@ -140,7 +140,7 @@ const Appointments = (props) => {
                 );
             })}
 
-            <h1>Past Appointments</h1>
+            <h1 style={{color: "#228B22"}}>Past Appointments</h1>
 
             {prevApt.map((appointment, idx) => {
                 const { eventName, date, time } = appointment;
@@ -176,7 +176,7 @@ const Appointments = (props) => {
                         </span>{" "}{time} |
                         <span>
                             {" "}
-                            <button style={{borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
+                            <button style={{background: "#FF6347", color: "white", borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
                                 Remove Appointment
                             </button>
                         </span>
