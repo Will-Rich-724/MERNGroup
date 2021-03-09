@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
 import axios from "axios";
-import LogOutButton from "../Components/LogOutButton";
 
 const Schedule = (props) => {
     const [location, setLocation] = useState(
@@ -9,10 +7,6 @@ const Schedule = (props) => {
     );
     const [appointments, setAppointments] = useState([]);
     const [userId, setUserId] = useState("");
-    const [claimedAppointment, setClaimedAppointment] = useState("");
-    const [date, setDate] = useState("");
-    const [time, setTime] = useState("");
-    const [eventName, setEventName] = useState("");
     const [errors, setErrors] = useState({});
     const [refresh, setRefresh] = useState(0)
     const { socket } = props;
@@ -22,7 +16,10 @@ const Schedule = (props) => {
         axios
             .get("http://localhost:8000/api/appointments")
             .then((res) => setAppointments(res.data))
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                setErrors(err);
+            });
     }, [refresh]);
 
     //Axois get loggged in user
@@ -34,15 +31,28 @@ const Schedule = (props) => {
             .then((res) => setUserId(res.data._id));
     }, []);
 
+    useEffect(() => {
+        socket.on("added_appointment_emitted", data => {
+            console.log("in added appointments emitted");
+            console.log(data.message);
+            setAppointments((currentAppointments) => [data.newAppointment, ...currentAppointments])
+        });
+
+        socket.on("claimed_appointment_omitted", data => {
+            console.log("in claimed appointments omitted");
+            console.log(data.message);
+            setAppointments((currentAppointments) => currentAppointments.filter(apt => {
+                return data.removedAppointment._id !== apt._id;
+            }))
+        })
+    }, [socket]);
+
     const takeAppointment = (e, apt) => {
         e.preventDefault();
-        setClaimedAppointment(apt._id);
-        setEventName(apt.eventName);
-        setDate(apt.date);
-        setTime(apt.time);
+
         axios
             .put(`http://localhost:8000/api/appointment/${apt._id}`, {
-                eventname: apt.eventName,
+                eventName: apt.eventName,
                 date: apt.date,
                 time: apt.time,
                 userId,
@@ -53,7 +63,7 @@ const Schedule = (props) => {
                 } else {
                     setRefresh(refresh + 1)
                     console.log("claimed");
-                    socket.emit("claimed_appointment_omitted", res.data);
+                    socket.emit("remove_appointment", res.data);
                 }
             })
             .catch((err) => console.log(err));
@@ -129,6 +139,7 @@ const Schedule = (props) => {
                             <span>
                                 {" "}
                                 <button
+                                    style={{background: "#32CD32", color: "white", borderRadius: "3px", padding: "10px"}}
                                     onClick={(e) =>
                                         takeAppointment(e, appointment)
                                     }
@@ -137,7 +148,10 @@ const Schedule = (props) => {
                                 </button>
                             </span>
                         </p>
-                    );
+                    )
+                }
+                else {
+                    return null;
                 }
             })}
         </div>

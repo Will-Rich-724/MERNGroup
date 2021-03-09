@@ -1,7 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { Router, Link, navigate } from '@reach/router';
-import axios from 'axios';
+import { Router } from '@reach/router';
 import io from 'socket.io-client';
 import LogReg from './Views/LogReg';
 import Schedule from './Views/Schedule';

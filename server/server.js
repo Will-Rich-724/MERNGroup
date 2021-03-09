@@ -51,6 +51,8 @@ io.on("connection", (socket) => {
     });
 
     socket.on("added_appointment", (data) => {
+        console.log("in added appointment");
+        console.log(data);
         socket.broadcast.emit("added_appointment_emitted", { 
             newAppointment: data,
             message: "Someone added a appointment to the schedule",

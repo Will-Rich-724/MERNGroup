@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Router, Link, navigate } from "@reach/router";
 import axios from "axios";
-import LogOutButton from "../Components/LogOutButton";
-import { Button } from "../Utils/Utils";
 
 const Appointments = (props) => {
     const [userAccount, setUserAccount] = useState("");
@@ -35,6 +32,7 @@ const Appointments = (props) => {
             })                
             .then((res) => {
                 setUserAccount(res.data._id);
+                console.log(userAccount);
                 axios
                     .get(`http://localhost:8000/api/user/${res.data._id}`, {
                         withCredentials: true,
@@ -57,7 +55,7 @@ const Appointments = (props) => {
                     })
                     .catch((err) => console.log(err));
             });
-    }, [refresh]);
+    }, [refresh, setLastName, setUserAccount, userAccount]);
 
     const deleteApt = (id) => {
         axios
@@ -96,41 +94,97 @@ const Appointments = (props) => {
 
     return (
         <div className="container" style={{ padding: "20px" }}>
-            <h3> Hi {firstName} here is a list of your appointments:</h3>
-            <h1>Upcoming Appointments</h1>
+            <h3> Hi {firstName} {lastName}, here is a list of your appointments:</h3>
+            
+            <h1 style={{color: "#228B22"}}>Upcoming Appointments</h1>
             {upcomingApt.map((appointment, idx) => {
                 const { eventName, date, time} = appointment;
 
                 return (
-                    <div key={idx}>
-                        <h2>{eventName}</h2>
+                    <div 
+                        key={idx}
+                        style={{
+                            width: "750px",
+                            marginTop: "20px",
+                            marginLeft: "150px",
+                            borderBottom: "1px solid black",
+                            paddingBottom: "5px",
+                        }}>
+                        <h5>{eventName}</h5>
                         <p>
-                            {date} {time}
+                        <span
+                                style={{
+                                    fontWeight: "bold",
+                                    color: "Cornflowerblue",
+                                }}
+                            >
+                                Date of Appointment:
+                        </span>{" "}{date} |
+                        <span
+                            style={{
+                                fontWeight: "bold",
+                                color: "Cornflowerblue",
+                            }}
+                        >
+                            {" "}
+                            Time of Appointment:
+                        </span>{" "}{time} |
+                        <span>
+                            {" "}
+                            <button style={{background: "#FF6347", color: "white", borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
+                                Remove Appointment
+                            </button>
+                        </span>
                         </p>
-                        <Button className="deleteApt" onClick={(e) => deleteApt(appointment._id) }>
-                            Remove Apt
-                        </Button>
                     </div>
                 );
             })}
 
-            <h1>Past Appointments</h1>
+            <h1 style={{color: "#228B22"}}>Past Appointments</h1>
 
             {prevApt.map((appointment, idx) => {
                 const { eventName, date, time } = appointment;
 
                 return (
-                    <div key={idx}>
-                        <h2>{eventName}</h2>
+                    <div 
+                        key={idx}
+                        style={{
+                            width: "750px",
+                            marginTop: "20px",
+                            marginLeft: "150px",
+                            borderBottom: "1px solid black",
+                            paddingBottom: "5px",
+                        }}>
+                        <h5>{eventName}</h5>
                         <p>
-                            {date} {time}
+                        <span
+                                style={{
+                                    fontWeight: "bold",
+                                    color: "Cornflowerblue",
+                                }}
+                            >
+                                Date of Appointment:
+                        </span>{" "}{date} |
+                        <span
+                            style={{
+                                fontWeight: "bold",
+                                color: "Cornflowerblue",
+                            }}
+                        >
+                            {" "}
+                            Time of Appointment:
+                        </span>{" "}{time} |
+                        <span>
+                            {" "}
+                            <button style={{background: "#FF6347", color: "white", borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
+                                Remove Appointment
+                            </button>
+                        </span>
                         </p>
-                        <Button className="deleteApt" onClick={(e) => deleteApt(appointment._id) }>
-                            Remove Apt
-                        </Button>
                     </div>
                 );
             })}
+
         </div>
     );
 };

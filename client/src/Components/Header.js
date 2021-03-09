@@ -6,7 +6,7 @@ const Header = (props) => {
 
   return (
       <div>
-        <h1 className="headerTitle">Blood Drive Pro</h1>
+        <h1 className="headerTitle" style={{color: "#FF6347"}}>Blood Drive Pro</h1>
       </div>
   )
 };
