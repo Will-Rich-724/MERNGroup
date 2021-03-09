@@ -32,7 +32,7 @@ const Appointments = (props) => {
         axios
             .get("http://localhost:8000/api/users/user/loggedin", {
                 withCredentials: true,
-            })
+            })                
             .then((res) => {
                 setUserAccount(res.data._id);
                 axios
