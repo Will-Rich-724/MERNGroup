@@ -8,7 +8,7 @@ const Schedule = (props) => {
     const [appointments, setAppointments] = useState([]);
     const [userId, setUserId] = useState("");
     const [errors, setErrors] = useState({});
-    const [refresh, setRefresh] = useState(0)
+    const [refresh, setRefresh] = useState(0);
     const { socket } = props;
 
     //Axios get all appointments
@@ -32,19 +32,24 @@ const Schedule = (props) => {
     }, []);
 
     useEffect(() => {
-        socket.on("added_appointment_emitted", data => {
+        socket.on("added_appointment_emitted", (data) => {
             console.log("in added appointments emitted");
             console.log(data.message);
-            setAppointments((currentAppointments) => [data.newAppointment, ...currentAppointments])
+            setAppointments((currentAppointments) => [
+                data.newAppointment,
+                ...currentAppointments,
+            ]);
         });
 
-        socket.on("claimed_appointment_omitted", data => {
+        socket.on("claimed_appointment_omitted", (data) => {
             console.log("in claimed appointments omitted");
             console.log(data.message);
-            setAppointments((currentAppointments) => currentAppointments.filter(apt => {
-                return data.removedAppointment._id !== apt._id;
-            }))
-        })
+            setAppointments((currentAppointments) =>
+                currentAppointments.filter((apt) => {
+                    return data.removedAppointment._id !== apt._id;
+                })
+            );
+        });
     }, [socket]);
 
     const takeAppointment = (e, apt) => {
@@ -61,7 +66,7 @@ const Schedule = (props) => {
                 if (res.data.errors) {
                     setErrors(res.data.errors);
                 } else {
-                    setRefresh(refresh + 1)
+                    setRefresh(refresh + 1);
                     console.log("claimed");
                     socket.emit("remove_appointment", res.data);
                 }
@@ -71,11 +76,11 @@ const Schedule = (props) => {
 
     return (
         <div className="container" style={{ padding: "20px" }}>
-            <h5 style={{ marginTop: "20px" }}>
+            <h5 className="prompt" style={{ marginTop: "20px" }}>
                 Please pick the donation site from the pulldown menu
             </h5>
             <form>
-                <select
+                <select className="dropDown"
                     id="location"
                     name="location"
                     input
@@ -97,8 +102,8 @@ const Schedule = (props) => {
                     </option>
                 </select>
             </form>
-            <h5 style={{ marginTop: "20px" }}>
-                Please view all appointments for {location} below
+            <h5 className="eventName" style={{ marginTop: "20px" }}>
+                All appointments available for {location}
             </h5>
 
             {appointments.map((appointment, index) => {
@@ -108,6 +113,7 @@ const Schedule = (props) => {
                 ) {
                     return (
                         <p
+                            className="appointments"
                             key={index}
                             style={{
                                 width: "750px",
@@ -117,29 +123,25 @@ const Schedule = (props) => {
                                 paddingBottom: "20px",
                             }}
                         >
-                            <span
-                                style={{
-                                    fontWeight: "bold",
-                                    color: "Cornflowerblue",
-                                }}
-                            >
-                                Date of Appointment:
-                            </span>{" "}
-                            {appointment.date} |
-                            <span
-                                style={{
-                                    fontWeight: "bold",
-                                    color: "Cornflowerblue",
-                                }}
-                            >
-                                {" "}
-                                Time of Appointment:
-                            </span>{" "}
-                            {appointment.time} |
+                            <div className="aptDisplay">
+                                <span
+                                    style={{
+                                        fontWeight: "bold",
+                                    }}
+                                >
+                                    Appointment Time:
+                                </span>{" "}
+                                {appointment.date} at {appointment.time} 
+                            </div>
                             <span>
                                 {" "}
                                 <button
-                                    style={{background: "#32CD32", color: "white", borderRadius: "3px", padding: "10px"}}
+                                    style={{
+                                        background: "#1e7e34",
+                                        color: "white",
+                                        borderRadius: "3px",
+                                        padding: "10px",
+                                    }}
                                     onClick={(e) =>
                                         takeAppointment(e, appointment)
                                     }
@@ -148,9 +150,8 @@ const Schedule = (props) => {
                                 </button>
                             </span>
                         </p>
-                    )
-                }
-                else {
+                    );
+                } else {
                     return null;
                 }
             })}

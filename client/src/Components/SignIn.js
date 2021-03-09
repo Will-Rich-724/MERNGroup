@@ -27,8 +27,9 @@ const SignIn = (props) => {
 
   return (
     <div className="signIn">
-      <fieldset>
-        <legend>Login</legend>
+      <legend className="userInfoHeader">Login</legend>
+      <fieldset className="userInfo">
+        
         <form onSubmit={login}>
           <InputGroup
             label="Email:"

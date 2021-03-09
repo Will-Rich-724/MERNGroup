@@ -1,34 +1,65 @@
 .App {
   text-align: center;
+  background-color: #5297AA;
+  height: 5000px;
 }
 
 .header {
   display: inline-flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 940px;
+  width: auto;
+  background-color: #047696;
+
+}
+
+.welcome {
+  font-size: 45px;
+  color: white;
 }
 
 .headerTitle {
   display: inline-block;
-  font-size: 40px;
-  width: 300px;
+  font-size: 50px;
+  width: 430px;
+  font-family: 'Paytone One', sans-serif;
+  color: #C20500;
 }
 
+.eventName {
+  color: #C20500;
+  font-size: 30px;
+}
+
+.prompt {
+  color: white;
+  font-size: 40px;
+}
+
+.navBar p {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: 'Paytone One', sans-serif;
+  margin-top: 13px;
+}
 .navBar {
   display: inline-flex;
   justify-content: space-evenly;
-  width: 600px;
+  width: 900px;
   text-decoration: none;
-  border: 1px solid black;
+  background-color: #047696;
   height: 55px;
   vertical-align: middle;
-  margin-top: 20px;
+  margin-top: 3px;
 }
 
-.navBar a {
-  text-decoration: none;
-  font: Black;
+.appointments {
+  width: 900px;
+}
+
+.aptHeader{
+  color: #00550A;
 }
 
 .logReg {
@@ -54,8 +85,51 @@
 
 }
 
+.aptDisplay{
+  font-size: 25px;
+  display: inline-flex;
+  justify-content: space-between;
+  width: 505px;
+  
+}
 
+.dropDown {
+  font-size: 25px;
+  background-color: #047696;
+  color: white;
+}
 
+.userInfo{
+  background-color: #047696;
+  width: 280px;
+  height: 560px;
+  color: white;
+  padding: 15px;
+}
+
+.userInfoHeader {
+  text-align: left;
+  font-size: 30px;
+  font-family: 'Paytone One', sans-serif;
+  color: white;
+}
+
+.addApt {
+  background-color: #1E7E34;
+  color: white;
+  width: 500px;
+  border-radius: 3px;
+  font-size: 30px;
+  margin-top: 20px;
+}
+
+.selectLocation {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 1700px;
+  margin-top: 20px;
+}
 
 .App-logo {
   height: 40vmin;
