@@ -41,8 +41,9 @@ const SignUp = (props) => {
 
     return (
         <div className="signUp">
-            <fieldset>
-                <legend>Register</legend>
+            <legend className="userInfoHeader">Register</legend>
+            <fieldset className="userInfo">
+                
                 <form onSubmit={register}>
                     <InputGroup
                         label="First Name"

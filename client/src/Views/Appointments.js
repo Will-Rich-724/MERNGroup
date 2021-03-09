@@ -94,97 +94,104 @@ const Appointments = (props) => {
 
     return (
         <div className="container" style={{ padding: "20px" }}>
-            <h3> Hi {firstName} {lastName}, here is a list of your appointments:</h3>
-            
-            <h1 style={{color: "#228B22"}}>Upcoming Appointments</h1>
+            <h3 className="welcome">
+                {" "}
+                Hi {firstName} {lastName}, here is a list of your appointments:
+            </h3>
+
+            <h1 className="aptHeader">Upcoming Appointments</h1>
             {upcomingApt.map((appointment, idx) => {
-                const { eventName, date, time} = appointment;
+                const { eventName, date, time } = appointment;
 
                 return (
-                    <div 
+                    <div
                         key={idx}
                         style={{
-                            width: "750px",
+                            width: "900px",
                             marginTop: "20px",
-                            marginLeft: "150px",
+                            marginLeft: "120px",
                             borderBottom: "1px solid black",
                             paddingBottom: "5px",
-                        }}>
-                        <h5>{eventName}</h5>
+                        }}
+                    >
+                        <h5 className="eventName">{eventName}</h5>
                         <p>
-                        <span
-                                style={{
-                                    fontWeight: "bold",
-                                    color: "Cornflowerblue",
-                                }}
-                            >
-                                Date of Appointment:
-                        </span>{" "}{date} |
-                        <span
-                            style={{
-                                fontWeight: "bold",
-                                color: "Cornflowerblue",
-                            }}
-                        >
-                            {" "}
-                            Time of Appointment:
-                        </span>{" "}{time} |
-                        <span>
-                            {" "}
-                            <button style={{background: "#FF6347", color: "white", borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
-                                Remove Appointment
-                            </button>
-                        </span>
+                            <div className="aptDisplay">
+                                <span
+                                    style={{
+                                        fontWeight: "bold",
+                                    }}
+                                >
+                                    Appointment Time:
+                                </span>{" "}
+                                {date} at {time}
+                            </div>
+                            <span>
+                                {" "}
+                                <button
+                                    style={{
+                                        background: "#dc3545",
+                                        color: "white",
+                                        borderRadius: "3px",
+                                        padding: "10px",
+                                    }}
+                                    onClick={() => deleteApt(appointment._id)}
+                                >
+                                    Cancel Appointment
+                                </button>
+                            </span>
                         </p>
                     </div>
                 );
             })}
 
-            <h1 style={{color: "#228B22"}}>Past Appointments</h1>
+            <h1 className="aptHeader">Past Appointments</h1>
 
             {prevApt.map((appointment, idx) => {
                 const { eventName, date, time } = appointment;
 
                 return (
-                    <div 
+                    <div
+                        className="appoinments"
                         key={idx}
                         style={{
-                            width: "750px",
+                            width: "900px",
                             marginTop: "20px",
-                            marginLeft: "150px",
+                            marginLeft: "120px",
                             borderBottom: "1px solid black",
                             paddingBottom: "5px",
-                        }}>
-                        <h5>{eventName}</h5>
+                        }}
+                    >
+                        <h5 className="eventName">{eventName}</h5>
                         <p>
-                        <span
-                                style={{
-                                    fontWeight: "bold",
-                                    color: "Cornflowerblue",
-                                }}
-                            >
-                                Date of Appointment:
-                        </span>{" "}{date} |
-                        <span
-                            style={{
-                                fontWeight: "bold",
-                                color: "Cornflowerblue",
-                            }}
-                        >
-                            {" "}
-                            Time of Appointment:
-                        </span>{" "}{time} |
-                        <span>
-                            {" "}
-                            <button style={{background: "#FF6347", color: "white", borderRadius: "3px", padding: "10px"}} onClick={() => deleteApt(appointment._id)}>
-                                Remove Appointment
-                            </button>
-                        </span>
+                            <div className="aptDisplay">
+                                <span
+                                    style={{
+                                        fontWeight: "bold",
+                                    }}
+                                >
+                                    Appointment Time:
+                                </span>{" "}
+                                {date} at {time}
+                            </div>
+                            <span>
+                                {" "}
+                                <button
+                                    style={{
+                                        background: "#dc3545",
+                                        color: "white",
+                                        borderRadius: "3px",
+                                        padding: "10px",
+                                    }}
+                                    onClick={() => deleteApt(appointment._id)}
+                                >
+                                    Remove Appointment
+                                </button>
+                            </span>
                         </p>
                     </div>
                 );
             })}
-
         </div>
     );
 };
