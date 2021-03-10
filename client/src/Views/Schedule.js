@@ -65,6 +65,7 @@ const Schedule = (props) => {
             .then((res) => {
                 if (res.data.errors) {
                     setErrors(res.data.errors);
+                    console.log(errors);
                 } else {
                     setRefresh(refresh + 1);
                     console.log("claimed");
@@ -137,7 +138,7 @@ const Schedule = (props) => {
                                 {" "}
                                 <button
                                     style={{
-                                        background: "#1e7e34",
+                                        background: "#228B22",
                                         color: "white",
                                         borderRadius: "3px",
                                         padding: "10px",

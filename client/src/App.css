@@ -23,11 +23,11 @@
   font-size: 50px;
   width: 430px;
   font-family: 'Paytone One', sans-serif;
-  color: #C20500;
+  color: orange;
 }
 
 .eventName {
-  color: #C20500;
+  color: orange;
   font-size: 30px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .aptHeader{
-  color: #00550A;
+  color: #228B22;
 }
 
 .logReg {
@@ -115,7 +115,7 @@
 }
 
 .addApt {
-  background-color: #1E7E34;
+  background-color: #228B22;
   color: white;
   width: 500px;
   border-radius: 3px;
